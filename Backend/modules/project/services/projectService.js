@@ -1,4 +1,11 @@
 const projectRepository = require('../repositories/projectRepository');
+const categoryRepository = require('../repositories/categoryRepository');
+
+// Validate if the category exists
+exports.validateCategory = async (categoryId) => {
+    const category = await categoryRepository.getCategoryById(categoryId);
+    return !!category; // Return true if category exists, false otherwise
+};
 
 // Create a new project
 exports.createProject = async (projectData) => {
