@@ -13,15 +13,15 @@ exports.getAllCategories = async () => {
 
 // Get a category by ID
 exports.getCategoryById = async (categoryId) => {
-    return await Category.findOne({ category_id: categoryId });
+    return await Category.findById(categoryId);
 };
 
 // Update a category
 exports.updateCategory = async (categoryId, categoryData) => {
-    return await Category.findOneAndUpdate({ category_id: categoryId }, categoryData, { new: true });
+    return await Category.findByIdAndUpdate(categoryId, categoryData, { new: true });
 };
 
 // Delete a category
 exports.deleteCategory = async (categoryId) => {
-    return await Category.findOneAndDelete({ category_id: categoryId });
+    return await Category.findByIdAndDelete(categoryId);
 };

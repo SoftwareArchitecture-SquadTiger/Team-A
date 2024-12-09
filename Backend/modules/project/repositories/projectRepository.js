@@ -13,7 +13,7 @@ exports.getAllProjects = async () => {
 
 // Get a specific project by ID
 exports.getProjectById = async (projectId) => {
-    return await Project.findOne({ project_id: projectId });
+    return await Project.findById(projectId);
 };
 
 // Update a project
