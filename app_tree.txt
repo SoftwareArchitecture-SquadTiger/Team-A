@@ -1,0 +1,30 @@
+team-a/
+├── backend/       # Backend folder (Node.js + Express + MongoDB)
+│   ├── modules/   # Modular backend implementation
+│   │   ├── project/
+│   │   ├── donation/
+│   │   ├── email/
+│   │   ├── encryption/
+│   │   └── user/
+│   ├── database/  # Database models and connection
+│   ├── middlewares/
+│   ├── routes/
+│   ├── utils/     # Helper functions (e.g., encryption, validation)
+│   └── app.js     # Entry point to the backend
+│
+├── frontend/      # Frontend folder (React.js)
+│   ├── src/
+│   │   ├── components/  # Reusable components
+│   │   │   ├── donor/
+│   │   │   ├── charity/
+│   │   │   └── admin/
+│   │   ├── pages/       # Full-page components
+│   │   ├── services/    # API calls and REST HTTP helper
+│   │   ├── styles/      # Global CSS or SCSS files
+│   │   └── App.js       # Entry point to the React app
+│   ├── public/
+│   └── package.json
+│
+├── .gitignore     # Git ignore file
+├── README.md      # Repository documentation
+└── package.json   # Manage dependencies for the entire repository
