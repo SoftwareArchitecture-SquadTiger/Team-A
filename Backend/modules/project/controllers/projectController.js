@@ -3,6 +3,14 @@ const projectService = require('../services/projectService');
 // Create a new project
 exports.createProject = async (req, res) => {
     try {
+        const { category_id } = req.body;
+
+        // Validate if the category exists
+        const categoryExists = await projectService.validateCategory(category_id);
+        if (!categoryExists) {
+            return res.status(400).json({ error: 'Invalid category_id. Category does not exist.' });
+        }
+
         const project = await projectService.createProject(req.body);
         res.status(201).json(project);
     } catch (err) {

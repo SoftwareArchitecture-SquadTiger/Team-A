@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const projectSchema = new mongoose.Schema({
     project_id: { type: String, default: uuidv4, unique: true },
-    category_id: { type: String, required: true },
+    category_id: { type: String, required: true }, // Reference to Category
     charity_id: { type: String, required: true },
     title: { type: String, required: true },
     target_amount: { type: Number, required: true },

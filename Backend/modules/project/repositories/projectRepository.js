@@ -1,4 +1,4 @@
-const Project = require('../models/project');
+const Project = require('../models/projectModel');
 
 // Create a new project
 exports.createProject = async (projectData) => {
@@ -13,7 +13,7 @@ exports.getAllProjects = async () => {
 
 // Get a specific project by ID
 exports.getProjectById = async (projectId) => {
-    return await Project.findById(projectId);
+    return await Project.findOne({ project_id: projectId });
 };
 
 // Update a project

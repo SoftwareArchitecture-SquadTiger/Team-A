@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./database/connection');
-const projectRoutes = require('./modules/project/routes/project'); // Ensure the correct path
+const projectRoutes = require('./modules/project/routes/project');
+const categoryRoutes = require('./modules/project/routes/category');
 
 dotenv.config();
 
@@ -23,6 +24,9 @@ app.get('/', (req, res) => {
 
 // Project routes
 app.use('/api/projects', projectRoutes);
+
+// Category routes
+app.use('/api/categories', categoryRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
