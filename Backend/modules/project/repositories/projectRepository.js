@@ -10,3 +10,18 @@ exports.createProject = async (projectData) => {
 exports.getAllProjects = async () => {
     return await Project.find();
 };
+
+// Get a specific project by ID
+exports.getProjectById = async (projectId) => {
+    return await Project.findById(projectId);
+};
+
+// Update a project
+exports.updateProject = async (projectId, projectData) => {
+    return await Project.findByIdAndUpdate(projectId, projectData, { new: true });
+};
+
+// Delete a project
+exports.deleteProject = async (projectId) => {
+    return await Project.findByIdAndDelete(projectId);
+};
