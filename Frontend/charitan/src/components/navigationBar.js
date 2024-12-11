@@ -1,29 +1,33 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, Link, Grid } from '@mui/material';
+import { AppBar, Toolbar, Box, Grid } from '@mui/material';
 import CharitanLogo from './charitanLogo';
 import NavLink from './navLink';
+import WelcomeBox from './welcomeBox';
 
 const NavigationBar = () => {
-  return (
-    <AppBar position="static" sx={{ backgroundColor: 'white' }}>
-      <Toolbar>
-        <Grid container alignItems="center">
-            <Grid item xs={12} md={6} textAlign={{ xs: 'center', md: 'left' }}>
-                <CharitanLogo color="black"/>
-            </Grid>
-          <Grid item xs={12} md={6} textAlign={{ xs: 'center', md: 'right' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
-                <NavLink href="/home" color="black" size="1.2rem">Home</NavLink>
-                <NavLink href="/discovery" color="black" size="1.2rem">Discovery</NavLink>
-                <NavLink href="/about-us" color="black" size="1.2rem">About Us</NavLink>
-                <NavLink href="/leaderboard" color="black" size="1.2rem">Leaderboard</NavLink>
-                <NavLink href="/history" color="black" size="1.2rem">History</NavLink>
-            </Box>
+    return (
+      <AppBar position="static" sx={{ backgroundColor: 'white' }}>
+        <Toolbar>
+          <Grid container alignItems="center" direction="row" justifyContent="space-between">
+              <Grid item sx={{ ml: 8, mr: 2 }}>
+                  <CharitanLogo color="black"/>
+              </Grid>
+              <Grid item sx={{ flexGrow: 4 }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4, ml: 4 }}> {/* Adjust the margin-left value as needed */}
+                      <NavLink href="/home" color="black" size="1.2rem">Home</NavLink>
+                      <NavLink href="/discovery" color="black" size="1.2rem">Discovery</NavLink>
+                      <NavLink href="/about-us" color="black" size="1.2rem">About Us</NavLink>
+                      <NavLink href="/leaderboard" color="black" size="1.2rem">Leaderboard</NavLink>
+                      <NavLink href="/history" color="black" size="1.2rem">History</NavLink>
+                  </Box>
+              </Grid>
+              <Grid item>
+                  <WelcomeBox userName="Nam"/>
+              </Grid>
           </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-  );
-};
+        </Toolbar>
+      </AppBar>
+    );
+}
 
 export default NavigationBar;
