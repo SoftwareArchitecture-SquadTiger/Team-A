@@ -1,13 +1,16 @@
 import React from 'react';
-import { Box, Typography, Link, Grid } from '@mui/material';
+import { Box, Typography, Link, Grid, useTheme } from '@mui/material';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 const Footer = () => {
+  const theme = useTheme(); // 테마 가져오기
+
   return (
     <Box
       component="footer"
       sx={{
-        backgroundColor: 'black',
-        color: 'white',
+        backgroundColor: theme.palette.background.black,
+        color: theme.palette.background.white,
         py: 4,
         px: 8,
         textAlign: 'center',
@@ -29,8 +32,9 @@ const Footer = () => {
           md={6} // medium screen size -> so set 6 means half of the screen
           textAlign={{ xs: 'center', md: 'left' }}>
           {/* Typography: similar with <p> but has reactive text size */}
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-            <span style={{ color: 'pink', marginRight: '5px' }}>♥</span>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', alignItems: 'center' }}>
+            <FavoriteBorderOutlinedIcon fontSize="small"
+              sx={{ color: theme.palette.element.pink}} />
             Charitan
           </Typography>
           <Typography variant="body2" sx={{ mt: 1 }}>
