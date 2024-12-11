@@ -1,0 +1,39 @@
+import React from 'react';
+import { Typography, Link as MuiLink } from '@mui/material';
+
+const NavLink = ({ href, children, color = 'black', size = 'inherit' }) => {
+  return (
+    <MuiLink
+      href={href}
+      underline="none"
+      sx={{
+        textDecoration: 'none',
+        '&:hover': {
+          textDecoration: 'none',
+        },
+        position: 'relative',
+        color: color,
+        fontWeight: 500,
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          bottom: -2,
+          left: 0,
+          width: 0,
+          height: 3,
+          backgroundColor: '#FB1465',
+          transition: 'width 0.3s ease-in-out',
+        },
+        '&:hover::after': {
+          width: '100%',
+        },
+      }}
+    >
+      <Typography variant="button" sx={{ color: 'inherit', textTransform: 'none', fontSize: size }}>
+        {children}
+      </Typography>
+    </MuiLink>
+  );
+};
+
+export default NavLink;

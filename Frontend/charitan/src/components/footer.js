@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Link, Grid, useTheme } from '@mui/material';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import CharitanLogo from './charitanLogo';
 
 const Footer = () => {
   const theme = useTheme(); // 테마 가져오기
@@ -32,11 +32,7 @@ const Footer = () => {
           md={6} // medium screen size -> so set 6 means half of the screen
           textAlign={{ xs: 'center', md: 'left' }}>
           {/* Typography: similar with <p> but has reactive text size */}
-          <Typography variant="h6" sx={{ fontWeight: 'bold', alignItems: 'center' }}>
-            <FavoriteBorderOutlinedIcon fontSize="small"
-              sx={{ color: theme.palette.element.pink}} />
-            Charitan
-          </Typography>
+          <CharitanLogo color="white"/>
           <Typography variant="body2" sx={{ mt: 1 }}>
             Making the world better, one donation at a time.
           </Typography>
