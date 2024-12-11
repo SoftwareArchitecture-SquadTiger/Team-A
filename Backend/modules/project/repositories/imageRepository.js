@@ -25,3 +25,8 @@ exports.updateImage = async (imageId, imageData) => {
 exports.deleteImage = async (imageId) => {
     return await Image.findByIdAndDelete(imageId);
 };
+
+// Get all images by project ID
+exports.getImagesByProjectId = async (projectId) => {
+    return await Image.find({ project_id: projectId });
+};

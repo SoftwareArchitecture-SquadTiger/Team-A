@@ -17,4 +17,7 @@ router.put('/:id', videoController.updateVideo);
 // Delete a video
 router.delete('/:id', videoController.deleteVideo);
 
+// Get all videos by project ID
+router.get('/project/:id', videoController.getVideosByProjectId);
+
 module.exports = router;

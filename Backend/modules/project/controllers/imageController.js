@@ -61,3 +61,19 @@ exports.deleteImage = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+// Get all images by project ID
+exports.getImagesByProjectId = async (req, res) => {
+    try {
+        // Validate if the project exists
+        const projectExists = await imageService.validateProject(req.params.id);
+        if (!projectExists) {
+            return res.status(400).json({ error: 'Invalid project_id. Project does not exist.' });
+        }
+
+        const images = await imageService.getImagesByProjectId(req.params.id);
+        res.status(200).json(images);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};

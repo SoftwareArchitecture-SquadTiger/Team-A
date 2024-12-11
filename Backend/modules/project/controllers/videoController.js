@@ -61,3 +61,19 @@ exports.deleteVideo = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+// Get all videos by project ID
+exports.getVideosByProjectId = async (req, res) => {
+    try {
+        // Validate if the project exists
+        const projectExists = await videoService.validateProject(req.params.id);
+        if (!projectExists) {
+            return res.status(400).json({ error: 'Invalid project_id. Project does not exist.' });
+        }
+
+        const videos = await videoService.getVideosByProjectId(req.params.id);
+        res.status(200).json(videos);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};

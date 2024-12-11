@@ -1,4 +1,11 @@
 const imageRepository = require('../repositories/imageRepository');
+const projectRepository = require('../repositories/projectRepository');
+
+// Validate if the project exists
+exports.validateProject = async (projectId) => {
+    const project = await projectRepository.getProjectById(projectId);
+    return !!project; // Return true if project exists, false otherwise
+};
 
 // Create a new image
 exports.createImage = async (imageData) => {
@@ -23,4 +30,9 @@ exports.updateImage = async (imageId, imageData) => {
 // Delete a image
 exports.deleteImage = async (imageId) => {
     return await imageRepository.deleteImage(imageId);
+};
+
+// Get all images by project ID
+exports.getImagesByProjectId = async (projectId) => {
+    return await imageRepository.getImagesByProjectId(projectId);
 };

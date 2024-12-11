@@ -25,3 +25,8 @@ exports.updateVideo = async (videoId, videoData) => {
 exports.deleteVideo = async (videoId) => {
     return await Video.findByIdAndDelete(videoId);
 };
+
+// Get all videos by project ID
+exports.getVideosByProjectId = async (projectId) => {
+    return await Video.find({ project_id: projectId });
+};

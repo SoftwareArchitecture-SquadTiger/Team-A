@@ -17,4 +17,7 @@ router.put('/:id', imageController.updateImage);
 // Delete a image
 router.delete('/:id', imageController.deleteImage);
 
+// Get all images by project ID
+router.get('/project/:id', imageController.getImagesByProjectId);
+
 module.exports = router;
