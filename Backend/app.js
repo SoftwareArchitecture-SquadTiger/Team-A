@@ -5,6 +5,8 @@ const cors = require('cors');
 const connectDB = require('./database/connection');
 const projectRoutes = require('./modules/project/routes/project');
 const categoryRoutes = require('./modules/project/routes/category');
+const imageRoutes = require('./modules/project/routes/image');
+const videoRoutes = require('./modules/project/routes/video');
 
 dotenv.config();
 
@@ -27,6 +29,12 @@ app.use('/api/projects', projectRoutes);
 
 // Category routes
 app.use('/api/categories', categoryRoutes);
+
+// Image routes
+app.use('/api/images', imageRoutes);
+
+// Video routes
+app.use('/api/videos', videoRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
