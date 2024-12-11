@@ -5,6 +5,8 @@ const cors = require('cors');
 const connectDB = require('./database/connection');
 const projectRoutes = require('./modules/project/routes/project');
 const categoryRoutes = require('./modules/project/routes/category');
+const emailRoutes = require('./modules/email/routes/emailRoutes');
+
 
 dotenv.config();
 
@@ -27,6 +29,9 @@ app.use('/api/projects', projectRoutes);
 
 // Category routes
 app.use('/api/categories', categoryRoutes);
+
+// Email routes
+app.use("/api/email", emailRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
