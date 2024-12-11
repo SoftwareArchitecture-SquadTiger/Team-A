@@ -1,5 +1,7 @@
 import { pink } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
+import '@fontsource/inter';
+
 
 const theme = createTheme({
   palette: {
@@ -23,6 +25,9 @@ const theme = createTheme({
     element: {
       default: '#ffffff', // element.default color (white)
       pink: '#fb1465', // element.pink color
+    },
+    typography: {
+      fontFamily: 'Inter, Arial, sans-serif', // set default Inter font
     },
   },
 });
