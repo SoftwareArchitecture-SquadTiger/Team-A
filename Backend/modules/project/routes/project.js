@@ -5,8 +5,8 @@ const projectController = require('../controllers/projectController'); // Ensure
 // Define routes
 router.post('/', projectController.createProject); // Create a new project
 router.get('/', projectController.getAllProjects); // Get all projects
-router.get('/:id', projectController.getProjectById);
-router.put('/:id', projectController.updateProject);
-router.delete('/:id', projectController.deleteProject);
+router.get('/:id', projectController.getProjectById); // Get a specific project
+router.put('/:id', projectController.updateProject); // Update a project
+router.delete('/:id', projectController.deleteProject); // Delete a project
 
 module.exports = router;
