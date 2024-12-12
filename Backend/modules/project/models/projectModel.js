@@ -14,6 +14,8 @@ const projectSchema = new mongoose.Schema({
     end_date: { type: Date, required: true },
     region: { type: String, required: true },
     country: { type: String, required: true },
+    images: [{ type: String, ref: 'Image' }], // Reference to Image
+    videos: [{ type: String, ref: 'Video' }], // Reference to Video
 });
 
 module.exports = mongoose.model('Project', projectSchema);
