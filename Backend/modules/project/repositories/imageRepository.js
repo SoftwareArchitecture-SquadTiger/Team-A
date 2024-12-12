@@ -11,19 +11,19 @@ exports.getAllImages = async () => {
     return await Image.find();
 };
 
-// Get a image by ID
+// Get a image by image_id
 exports.getImageById = async (imageId) => {
-    return await Image.findById(imageId);
+    return await Image.findOne({ image_id: imageId });
 };
 
 // Update a image
 exports.updateImage = async (imageId, imageData) => {
-    return await Image.findByIdAndUpdate(imageId, imageData, { new: true });
+    return await Image.findOneAndUpdate({ image_id: imageId }, imageData, { new: true });
 };
 
 // Delete a image
 exports.deleteImage = async (imageId) => {
-    return await Image.findByIdAndDelete(imageId);
+    return await Image.findOneAndDelete({ image_id: imageId });
 };
 
 // Get all images by project ID
