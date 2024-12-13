@@ -7,6 +7,7 @@ const projectRoutes = require('./modules/project/routes/project');
 const categoryRoutes = require('./modules/project/routes/category');
 const imageRoutes = require('./modules/project/routes/image');
 const videoRoutes = require('./modules/project/routes/video');
+const emailRoutes = require('./modules/email/routes/emailRoutes');
 
 dotenv.config();
 
@@ -35,6 +36,9 @@ app.use('/api/images', imageRoutes);
 
 // Video routes
 app.use('/api/videos', videoRoutes);
+
+//Email routes
+app.use('/api/email', emailRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
