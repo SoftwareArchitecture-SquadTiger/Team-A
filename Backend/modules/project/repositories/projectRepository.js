@@ -18,12 +18,12 @@ exports.getProjectById = async (projectId) => {
 
 // Update a project
 exports.updateProject = async (projectId, projectData) => {
-    return await Project.findByIdAndUpdate({ project_id: projectId }, projectData, { new: true });
+    return await Project.findOneAndUpdate({ project_id: projectId }, projectData, { new: true });
 };
 
 // Delete a project
 exports.deleteProject = async (projectId) => {
-    return await Project.findByIdAndDelete({ project_id: projectId });
+    return await Project.findOneAndDelete({ project_id: projectId });
 };
 
 // Get all projects by category
