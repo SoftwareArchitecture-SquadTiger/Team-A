@@ -25,7 +25,7 @@ const CustomCard = ({ icon: Icon, title, description }) => {
           marginBottom: 2,
         }}
       >
-        <Icon sx={{ fontSize: 48, color: '#F45D8D' }} /> {/* Icon passed as prop */}
+        <Icon sx={{ fontSize: 48, color: '#fb1465' }} /> {/* Icon passed as prop */}
       </Box>
       <CardContent>
         <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>

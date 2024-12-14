@@ -9,10 +9,9 @@ const DonationBanner = ({ imageSrc, height }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0px",
+        padding: "1px",
         borderRadius: "0px",
         backgroundColor: "#fff",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         overflow: "hidden",
         flexDirection: { xs: "column", md: "row" },
         height: height, // Set the height from the prop
@@ -24,7 +23,7 @@ const DonationBanner = ({ imageSrc, height }) => {
         sx={{
           maxWidth: "50%",
           textAlign: { xs: "center", md: "left" },
-          padding: "40px",
+          padding: "140px",
           flex: "1 1 auto", // Allows the text content to adapt to height changes
         }}
       >
