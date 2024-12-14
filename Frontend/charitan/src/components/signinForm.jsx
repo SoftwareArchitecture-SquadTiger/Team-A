@@ -44,20 +44,24 @@ const SigninForm = () => {
         </Typography>
       </Box>
 
-      {/* Role Selector
-      <Box sx={{ mb: 2, display: "flex", flexDirection: "row" }}>
+      {/* Role Selector */}
+      <Box sx={{ mb: 1, display: "flex", flexDirection: "row" }}>
+        <Typography fontSize={16} sx={{ mt: 1 }}>
+          Role: 
+        </Typography>
         <select
           id="role"
           value={role}
           onChange={handleChange}
           style={{
-            width: "50%",
+            width: "27%",
             height: "40px",
-            padding: "0 12px",
-            fontSize: "20px",
+            padding: "0 5px",
+            fontSize: "16px",
             border: "0px solid #ccc",
             borderRadius: "4px",
             backgroundColor: "white",
+            textAlign: "left",
             fontFamily: theme.typography.fontFamily,
           }}
         >
@@ -65,7 +69,7 @@ const SigninForm = () => {
           <option value="Charity">Charity</option>
         </select>
       </Box>
-       */}
+      
       {/* input field */}
       <Box>
         {/* Email Field */}
