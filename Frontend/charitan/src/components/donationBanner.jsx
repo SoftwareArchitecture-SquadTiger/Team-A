@@ -23,7 +23,7 @@ const DonationBanner = ({ imageSrc, height }) => {
         sx={{
           maxWidth: "50%",
           textAlign: { xs: "center", md: "left" },
-          padding: "140px",
+          padding: "100px",
           flex: "1 1 auto", // Allows the text content to adapt to height changes
         }}
       >
