@@ -16,15 +16,11 @@ const theme = createTheme({
       black: '#000000', // background.black color
       white: '#ffffff', // background.white color
     },
-    fontcolor: {
+    colors: {
       default: '#000000', // fontcolor.default color (black)
       white: '#ffffff', // fontcolor.white color
-      pink: 'fb1465', // fontcolor.pink color
-      successgreen: '00FF26', // fontcolor.successgreen color
-    },
-    element: {
-      default: '#ffffff', // element.default color (white)
-      pink: '#fb1465', // element.pink color
+      pink: '#fb1465', // fontcolor.pink color
+      successgreen: '#00FF26', // fontcolor.successgreen color
     },
     typography: {
       fontFamily: 'Inter, Arial, sans-serif', // set default Inter font

@@ -1,13 +1,14 @@
-const SigninPage = () => {
+
+const RecoveryPage = () => {
     return (
         <div className="App">
             < header className="App-header" >
                 <p>
-                    Signin Page
+                    This page is recovery page
                 </p>
             </header >
         </div>
     );
 };
 
-export default SigninPage;
+export default RecoveryPage;

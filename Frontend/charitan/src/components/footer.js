@@ -3,7 +3,7 @@ import { Box, Typography, Link, Grid, useTheme } from '@mui/material';
 import CharitanLogo from './charitanLogo';
 
 const Footer = () => {
-  const theme = useTheme(); // 테마 가져오기
+  const theme = useTheme();
 
   return (
     <Box

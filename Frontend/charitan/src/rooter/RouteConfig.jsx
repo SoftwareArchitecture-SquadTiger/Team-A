@@ -1,8 +1,9 @@
-import { Suspense, lazy } from 'react';
+import { Suspense} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import SamplePage from '../pages/SamplePage';
 import SigninPage from '../pages/SigninPage';
+import RecoveryPage from '../pages/RecoveryPage';
 
 const RouteConfig = () => {
 
@@ -11,7 +12,9 @@ const RouteConfig = () => {
             <Routes>
                 <Route path="/" element={< SamplePage />} />
                 <Route path="/home" element={< SamplePage />} />
-                <Route path="/login" element={<SigninPage />} />
+                <Route path="/signin" element={<SigninPage />} />
+                <Route path="/signup" element={<SigninPage />} />
+                <Route path="/recovery" element={<RecoveryPage />} />
             </Routes>
         </Suspense>
     )
