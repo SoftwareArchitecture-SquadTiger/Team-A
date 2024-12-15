@@ -19,7 +19,7 @@ const NavLink = ({ href, children, color = 'black', size = 'inherit', highlight 
           width: highlight ? '100%' : 0,
           height: 3,
           backgroundColor: '#FB1465',
-          transition: 'width 0.3s ease-in-out',
+          transition: 'width 0.1s ease-in-out',
         },
         '&:hover::after': {
           width: '100%',
