@@ -21,11 +21,11 @@ const NavigationBar = () => {
               </Grid>
               <Grid item sx={{ flexGrow: 4 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'row', gap: 4, ml: 4 }}> {/* Adjust the margin-left value as needed */}
-                      <NavLink href="/home" color="black" size="1.2rem">Home</NavLink>
-                      <NavLink href="/discovery" color="black" size="1.2rem">Discovery</NavLink>
-                      <NavLink href="/about-us" color="black" size="1.2rem">About Us</NavLink>
-                      <NavLink href="/leaderboard" color="black" size="1.2rem">Leaderboard</NavLink>
-                      <NavLink href="/history" color="black" size="1.2rem">History</NavLink>
+                      <NavLink href="/home" color="black" size="1rem">Home</NavLink>
+                      <NavLink href="/discovery" color="black" size="1rem">Discovery</NavLink>
+                      <NavLink href="/about-us" color="black" size="1rem">About Us</NavLink>
+                      <NavLink href="/leaderboard" color="black" size="1rem">Leaderboard</NavLink>
+                      <NavLink href="/history" color="black" size="1rem">History</NavLink>
                   </Box>
               </Grid>
               <Grid item>

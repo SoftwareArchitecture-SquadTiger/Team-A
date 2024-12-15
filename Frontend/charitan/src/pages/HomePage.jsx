@@ -78,7 +78,7 @@ const HomePage = () => {
                       marginBottom: 2,
                     }}
                   >
-                    <card.icon sx={{ fontSize: 48, color: '#F45D8D' }} />
+                    <card.icon sx={{ fontSize: 48, color: '#FB1465' }} />
                   </Box>
                   <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
                     {card.title}
