@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Container, Card, CardActionArea, Box, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocation for current route
 import charityImage from '../assets/charity.png';
 import NavigationBar from '../components/navigationBar';
 import Footer from '../components/footer';
@@ -12,10 +12,9 @@ import HistoryIcon from '@mui/icons-material/History';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-
-
 const HomePage = () => {
   const navigate = useNavigate(); // React Router hook for navigation
+  const location = useLocation(); // React Router hook to get the current route
 
   // Define the card data
   const cards = [
@@ -47,7 +46,8 @@ const HomePage = () => {
 
   return (
     <>
-      <NavigationBar />
+      {/* Pass the current route's pathname to NavigationBar */}
+      <NavigationBar currentPage={location.pathname} />
       <DonationBanner imageSrc={charityImage} height="35vh" />
       <Container
         sx={{

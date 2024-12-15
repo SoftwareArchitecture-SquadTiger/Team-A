@@ -8,7 +8,7 @@ const CharitanLogo = ({ color = 'black' }) => {
       {/* Heart Icon */}
       <FavoriteBorder sx={{ color: '#FB1465', fontSize: '50px' }} />
       {/* Text */}
-      <Typography variant="h4" sx={{ marginLeft: '4px', fontWeight: 600, color }}>
+      <Typography variant="h4" sx={{ marginLeft: '4px', fontWeight: 600, color}}>
         Charitan
       </Typography>
     </Box>
