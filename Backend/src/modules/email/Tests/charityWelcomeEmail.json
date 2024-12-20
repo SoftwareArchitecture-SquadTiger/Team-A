@@ -1,12 +1,9 @@
 {
   "to": {
-    "email": "info@savetheoceans.org",
-    "name": "Save the Oceans Foundation"
+    "email": "vinhhuu02@gmail.com",
+    "name": "Hope Foundation"
   },
   "charityData": {
-    "charity": {
-      "name": "Save the Oceans Foundation"
-    },
-    "charity_dashboard_url": "https://charitan.org/charity/dashboard"
+    "welcomeMessage": "Welcome to Charitan! We are excited to help you make an impact in the world."
   }
 }
