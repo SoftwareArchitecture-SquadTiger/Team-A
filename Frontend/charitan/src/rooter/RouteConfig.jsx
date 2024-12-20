@@ -1,11 +1,12 @@
 import { Suspense} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
-import SamplePage from '../pages/SamplePage';
+import AboutUsPage from '../pages/donor/AboutUsPage';
 import SigninPage from '../pages/auth/SigninPage';
 import SignupPage from '../pages/auth/SignupPage';
 import ForgetPage from '../pages/auth/ForgetPage';
 import RecoveryPage from '../pages/auth/RecoveryPage';
+import ProjectList from '../pages/ProjectListPage';
 
 import HomePage from '../pages/HomePage';
 
@@ -21,6 +22,7 @@ const RouteConfig = () => {
                 <Route path="/forget" element={<ForgetPage />} />
                 <Route path="/recovery" element={<RecoveryPage />} />
                 <Route path="/about-us" element={<AboutUsPage />} />
+                <Route path="/projects" element={<ProjectList />} />
             </Routes>
         </Suspense>
     )
