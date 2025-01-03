@@ -38,7 +38,7 @@ exports.encryptData = async (model, data, entityId) => {
             keyPair = await repoInstance.saveKeys(entityId, publicKey, privateKey);
         }
 
-        publicKey = existingKey.public_key;
+        publicKey = existingKey? existingKey.publicKey: keyPair.public_key;
         // Step 2: Encrypt data with the public key
         const encryptedData = crypto.publicEncrypt(
             {
