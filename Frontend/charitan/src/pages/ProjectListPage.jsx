@@ -1,70 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { CircularProgress, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import NavigationBar from '../components/navigationBar';
 import PageBanner from '../components/pageBanner';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: 'dtyc0iz95'
+  }
+});
 
 const ProjectList = () => {
-    const [projects, setProjects] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const [imageUrl, setImageUrl] = useState('');
 
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const response = await axios.get('http://localhost:5002/api/projects');
-                setProjects(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching projects:', error);
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    const loadScript = () => {
+      const script = document.createElement('script');
+      script.src = 'https://widget.cloudinary.com/v2.0/global/all.js';
+      script.async = true;
+      script.onload = () => {
+        console.log('Cloudinary script loaded');
+      };
+      document.body.appendChild(script);
+    };
 
-        fetchProjects();
-    }, []);
+    loadScript();
+  }, []);
 
-    if (loading) {
-        return <CircularProgress />;
+  const handleUpload = () => {
+    if (window.cloudinary) {
+      window.cloudinary.openUploadWidget(
+        {
+          cloudName: 'dtyc0iz95',
+          uploadPreset: 'unsignedPreset',
+          apiKey: '136267292197893',
+          apiSecret: 'LsSff9stcAI5HmZW2HlDAySZsE8',
+          sources: ['local', 'url', 'camera'],
+          multiple: false,
+          cropping: true,
+          croppingAspectRatio: 1,
+          showSkipCropButton: false,
+          folder: 'testPreset/images/',
+        },
+        (error, result) => {
+          if (!error && result && result.event === 'success') {
+            setImageUrl(result.info.secure_url);
+          }
+        }
+      );
+    } else {
+      console.error('Cloudinary script not loaded');
     }
+  };
 
-    return (
-        <div>
-            <NavigationBar />
-            <PageBanner text="Project List" />
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <TableContainer component={Paper} style={{ margin: '20px', maxWidth: '90vw', overflowX: 'auto' }}>
-                    <Table size="small">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Title</TableCell>
-                                <TableCell>Description</TableCell>
-                                <TableCell>Target Amount</TableCell>
-                                <TableCell>Current Amount</TableCell>
-                                <TableCell>Start Date</TableCell>
-                                <TableCell>End Date</TableCell>
-                                <TableCell>Region</TableCell>
-                                <TableCell>Country</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {projects.map((project) => (
-                                <TableRow key={project._id}>
-                                    <TableCell>{project.title}</TableCell>
-                                    <TableCell>{project.description}</TableCell>
-                                    <TableCell>{project.target_amount}</TableCell>
-                                    <TableCell>{project.current_amount}</TableCell>
-                                    <TableCell>{new Date(project.start_date).toLocaleDateString()}</TableCell>
-                                    <TableCell>{new Date(project.end_date).toLocaleDateString()}</TableCell>
-                                    <TableCell>{project.region}</TableCell>
-                                    <TableCell>{project.country}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <NavigationBar />
+      <PageBanner />
+      <div style={{ textAlign: 'center', margin: '20px 0' }}>
+      <button onClick={handleUpload}>Upload Image</button>
+      {imageUrl && (
+        <>
+          <AdvancedImage cldImg={cld.image(imageUrl.split('/').slice(7).join('/').replace('.png', ''))} alt="Uploaded Image" style={{ maxWidth: '100%', height: 'auto' }} />
+          <p>{imageUrl.split('/').slice(7).join('/').replace('.png', '')}</p> {/* Display the extracted part of the imageUrl on the screen */}
+        </>
+      )}
+    </div>
+    </div>
+  );
 };
 
 export default ProjectList;
