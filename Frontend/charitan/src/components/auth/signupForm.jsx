@@ -16,6 +16,8 @@ import DonorForm from "./donorForm";
 import CharityForm from "./charityForm";
 import RoleSelector from "./roleSelector"
 import ImageUploader from "../imageUploader";
+import forge from "node-forge";
+
 
 const SignupForm = () => {
   const theme = useTheme();
@@ -29,7 +31,13 @@ const SignupForm = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    address: "",
+    address: {
+      street: "",
+      city: "",
+      state: "",
+      postal_code: "",
+      country: "",
+    },
     password: "",
     passwordConfirm: "",
     charityName: "",
@@ -37,6 +45,24 @@ const SignupForm = () => {
     charityType: "",
     img: "",
   });
+
+  const rsaPublicKey = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu/tB9+zU3RxhdeiLXgZF
+pql7GpOLzDcbXneQubo5B02iuRIuO2m0bmCYzG2sdqu5bOOG4jieegDr6X75nC26
+Sb/wVwH5xP1/EJayL6va1se/Zh+aiYWhWRW82j6meLvxodZoIcV2TGhQoZEHBVQ/
+Ta4i1dJr/rtdoha2f8H/YUF+wToTMCaNcqDEbNYQnhj55fLZ0+y+a9o8MQHXP4VB
+FcSqyKTKAO+r3vlnxyXezhZtP1jt9Mp5Lg60qHjEpxfnridchQSJUxSBMw87BOC3
+hBcrQjEA12pRnkGQCO4tZXyrC0kaRS2edBLj+B4qnmO1u3rzEvMSsJY0jL13ftdS
+TQIDAQAB
+  -----END PUBLIC KEY-----`
+
+  const encryptData = (data) => {
+    const publicKey = forge.pki.publicKeyFromPem(rsaPublicKey);
+    const encrypted = publicKey.encrypt(data, "RSA-OAEP", {
+      md: forge.md.sha256.create(),
+    });
+    return forge.util.encode64(encrypted);
+  };
 
   // role select function
   const handleRoleSelect = (role) => {
@@ -48,7 +74,13 @@ const SignupForm = () => {
       lastName: "",
       email: "",
       phoneNumber: "",
-      address: "",
+      address: {
+        street: "",
+        city: "",
+        state: "",
+        postal_code: "",
+        country: "",
+      },
       password: "",
       passwordConfirm: "",
       charityName: "",
@@ -73,6 +105,27 @@ const SignupForm = () => {
     }
   };
 
+  const handleAddressChange = (field, value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      address: {
+        ...prevData.address,
+        [field]: value,
+      },
+    }));
+  
+    if (value.trim() !== "") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        address: {
+          ...prevErrors.address,
+          [field]: false,
+        },
+      }));
+    }
+  };
+  
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -85,7 +138,11 @@ const SignupForm = () => {
       if (!formData.lastName.trim()) newErrors.lastName = true;
       if (!formData.email.trim()) newErrors.email = true;
       if (!formData.phoneNumber.trim()) newErrors.phoneNumber = true;
-      if (!formData.address.trim()) newErrors.address = true;
+      if (!formData.address.street.trim()) newErrors.address = { ...newErrors.address, street: true };
+      if (!formData.address.city.trim()) newErrors.address = { ...newErrors.address, city: true };
+      if (!formData.address.state.trim()) newErrors.address = { ...newErrors.address, state: true };
+      if (!formData.address.postal_code.trim()) newErrors.address = { ...newErrors.address, postal_code: true };
+      if (!formData.address.country.trim()) newErrors.address = { ...newErrors.address, country: true };
       if (!formData.password.trim()) newErrors.password = true;
       if (!formData.passwordConfirm.trim()) newErrors.passwordConfirm = true;
     } else if (formData.type === "Charity") {
@@ -94,7 +151,11 @@ const SignupForm = () => {
       if (!formData.taxCode.trim()) newErrors.taxCode = true;
       if (!formData.email.trim()) newErrors.email = true;
       if (!formData.phoneNumber.trim()) newErrors.phoneNumber = true;
-      if (!formData.address.trim()) newErrors.address = true;
+      if (!formData.address.street.trim()) newErrors.address = { ...newErrors.address, street: true };
+      if (!formData.address.city.trim()) newErrors.address = { ...newErrors.address, city: true };
+      if (!formData.address.state.trim()) newErrors.address = { ...newErrors.address, state: true };
+      if (!formData.address.postal_code.trim()) newErrors.address = { ...newErrors.address, postal_code: true };
+      if (!formData.address.country.trim()) newErrors.address = { ...newErrors.address, country: true };
       if (!formData.charityType.trim()) newErrors.charityType = true;
       if (!formData.password.trim()) newErrors.password = true;
       if (!formData.passwordConfirm.trim()) newErrors.passwordConfirm = true;
@@ -109,7 +170,7 @@ const SignupForm = () => {
   };
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
     let filteredData;
 
     // form validate check 
@@ -121,37 +182,83 @@ const SignupForm = () => {
     // filter data based on the role
     if (formData.type === "Donor") {
       filteredData = {
-        type: formData.type,
+        userType: (formData.type || "").toLowerCase(),
         country: formData.country,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        email: formData.email,
+        email: encryptData(formData.email),
         phoneNumber: formData.phoneNumber,
-        address: formData.address,
-        password: formData.password,
-        passwordConfirm: formData.passwordConfirm,
+        address: {
+          street: formData.address.street,
+          city: formData.address.city,
+          state: formData.address.state,
+          postal_code: formData.address.postal_code,
+          country: formData.address.country,
+        },        
+        password: encryptData(formData.password),
+        // FOR safety issue, confirming password wont saved
         // Include the image URL, or null if no image was uploaded
         img: formData.img || null
       };
     } else {
       filteredData = {
-        type: formData.type,
+        userType: (formData.type || "").toLowerCase(),
         country: formData.country,
         charityName: formData.charityName,
         taxCode: formData.taxCode,
-        email: formData.email,
+        email: encryptData(formData.email),
         phoneNumber: formData.phoneNumber,
-        address: formData.address,
+        address: {
+          street: formData.address.street,
+          city: formData.address.city,
+          state: formData.address.state,
+          postal_code: formData.address.postal_code,
+          country: formData.address.country,
+        },        
         charityType: formData.charityType,
-        password: formData.password,
-        passwordConfirm: formData.passwordConfirm,
+        password: encryptData(formData.password),
         // Include the image URL, or null if no image was uploaded
         img: formData.img || null
       };
     }
 
-    console.log("Submitted Data:", filteredData);
-    alert(`Submitted Data: ${JSON.stringify(filteredData, null, 2)}`);
+      try {
+        // console.log(dataToSend)
+       // Store dataToSend in the context
+        // updateApiData(dataToSend);
+  
+        const response = await fetch("http://172.30.1.26:5001/admin-server/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json"
+           },
+          body: JSON.stringify(filteredData),
+          
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Sign up failed");
+        }
+  
+        const data = await response.json();
+  
+        if (data.status === "success") {
+          const jwe = data.JWE; // Extract JWE
+          //localStorage.setItem("authToken", jwe); // Save JWE for subsequent requests
+          alert("Sign-up successful!");
+        } else {
+          throw new Error("Invalid credentials");
+        }
+  
+  
+        alert("Login successful!");
+      } catch (error) {
+        setErrors(error.message);
+        console.error("Error:", error.message);
+      }
+
+    // console.log("Submitted Data:", filteredData);
+    // alert(`Submitted Data: ${JSON.stringify(filteredData, null, 2)}`);
   };
 
   // Add script loader for Cloudinary
@@ -238,9 +345,9 @@ const SignupForm = () => {
       {/* Form Fields */}
       {/* Change the form up to user type */}
       {formData.type === "Donor" ? (
-        <DonorForm formData={formData} handleInputChange={handleInputChange} errors={errors} />
+        <DonorForm formData={formData} handleInputChange={handleInputChange} handleAddressChange={handleAddressChange} errors={errors} />
       ) : (
-        <CharityForm formData={formData} handleInputChange={handleInputChange} errors={errors} />
+        <CharityForm formData={formData} handleInputChange={handleInputChange} handleAddressChange={handleAddressChange} errors={errors} />
       )}
 
       {/* Terms and Conditions */}
