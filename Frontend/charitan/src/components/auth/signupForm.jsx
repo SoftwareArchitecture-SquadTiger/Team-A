@@ -38,12 +38,14 @@ const SignupForm = () => {
       postal_code: "",
       country: "",
     },
+    country: "",
     password: "",
     passwordConfirm: "",
     charityName: "",
     taxCode: "",
     charityType: "",
     img: "",
+    paypal_email:"",
   });
 
   const rsaPublicKey = `-----BEGIN PUBLIC KEY-----
@@ -81,12 +83,14 @@ TQIDAQAB
         postal_code: "",
         country: "",
       },
+      country: "",
       password: "",
       passwordConfirm: "",
       charityName: "",
       taxCode: "",
       charityType: "",
       img: "",
+      paypal_email:"",
     });
   };
 
@@ -124,7 +128,6 @@ TQIDAQAB
       }));
     }
   };
-  
 
   const validateForm = () => {
     const newErrors = {};
@@ -142,7 +145,7 @@ TQIDAQAB
       if (!formData.address.city.trim()) newErrors.address = { ...newErrors.address, city: true };
       if (!formData.address.state.trim()) newErrors.address = { ...newErrors.address, state: true };
       if (!formData.address.postal_code.trim()) newErrors.address = { ...newErrors.address, postal_code: true };
-      if (!formData.address.country.trim()) newErrors.address = { ...newErrors.address, country: true };
+      if (!formData.country.trim()) newErrors.country = true;
       if (!formData.password.trim()) newErrors.password = true;
       if (!formData.passwordConfirm.trim()) newErrors.passwordConfirm = true;
     } else if (formData.type === "Charity") {
@@ -155,7 +158,8 @@ TQIDAQAB
       if (!formData.address.city.trim()) newErrors.address = { ...newErrors.address, city: true };
       if (!formData.address.state.trim()) newErrors.address = { ...newErrors.address, state: true };
       if (!formData.address.postal_code.trim()) newErrors.address = { ...newErrors.address, postal_code: true };
-      if (!formData.address.country.trim()) newErrors.address = { ...newErrors.address, country: true };
+      if (!formData.country.trim()) newErrors.country = true;
+      if (!formData.paypal_email.trim()) newErrors.paypal_email = true;
       if (!formData.charityType.trim()) newErrors.charityType = true;
       if (!formData.password.trim()) newErrors.password = true;
       if (!formData.passwordConfirm.trim()) newErrors.passwordConfirm = true;
@@ -182,40 +186,39 @@ TQIDAQAB
     // filter data based on the role
     if (formData.type === "Donor") {
       filteredData = {
-        userType: (formData.type || "").toLowerCase(),
-        country: formData.country,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        userType: formData.type,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
         email: encryptData(formData.email),
-        phoneNumber: formData.phoneNumber,
+        phone: formData.phoneNumber,
         address: {
           street: formData.address.street,
           city: formData.address.city,
           state: formData.address.state,
           postal_code: formData.address.postal_code,
-          country: formData.address.country,
         },        
+        country: formData.country,
         password: encryptData(formData.password),
         // FOR safety issue, confirming password wont saved
         // Include the image URL, or null if no image was uploaded
         img: formData.img || null
       };
-    } else {
+    } else { // charity
       filteredData = {
-        userType: (formData.type || "").toLowerCase(),
-        country: formData.country,
-        charityName: formData.charityName,
-        taxCode: formData.taxCode,
+        userType: formData.type,
+        name: formData.charityName,
+        tax_code: formData.taxCode,
         email: encryptData(formData.email),
-        phoneNumber: formData.phoneNumber,
+        phone: formData.phoneNumber,
         address: {
           street: formData.address.street,
           city: formData.address.city,
           state: formData.address.state,
-          postal_code: formData.address.postal_code,
-          country: formData.address.country,
+          zip: formData.address.postal_code,
         },        
-        charityType: formData.charityType,
+        country: formData.country,
+        type: formData.charityType,
+        paypal_email: formData.paypal_email,
         password: encryptData(formData.password),
         // Include the image URL, or null if no image was uploaded
         img: formData.img || null
@@ -245,20 +248,18 @@ TQIDAQAB
         if (data.status === "success") {
           const jwe = data.JWE; // Extract JWE
           //localStorage.setItem("authToken", jwe); // Save JWE for subsequent requests
+          console.log(data)
           alert("Sign-up successful!");
         } else {
+          console.error("Detailed error response:", data); // 디버깅용 서버 응답 출력
+
           throw new Error("Invalid credentials");
         }
   
-  
-        alert("Login successful!");
-      } catch (error) {
+        } catch (error) {
         setErrors(error.message);
         console.error("Error:", error.message);
       }
-
-    // console.log("Submitted Data:", filteredData);
-    // alert(`Submitted Data: ${JSON.stringify(filteredData, null, 2)}`);
   };
 
   // Add script loader for Cloudinary

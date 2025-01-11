@@ -37,7 +37,7 @@ Ta4i1dJr/rtdoha2f8H/YUF+wToTMCaNcqDEbNYQnhj55fLZ0+y+a9o8MQHXP4VB
 FcSqyKTKAO+r3vlnxyXezhZtP1jt9Mp5Lg60qHjEpxfnridchQSJUxSBMw87BOC3
 hBcrQjEA12pRnkGQCO4tZXyrC0kaRS2edBLj+B4qnmO1u3rzEvMSsJY0jL13ftdS
 TQIDAQAB
------END PUBLIC KEY-----`
+  -----END PUBLIC KEY-----`
 
   const encryptData = (data) => {
     const publicKey = forge.pki.publicKeyFromPem(rsaPublicKey);
@@ -67,7 +67,7 @@ TQIDAQAB
       // Store dataToSend in the context
       // updateApiData(dataToSend);
 
-      const response = await fetch("http://172.30.1.26:5001/client-server/auth/login", {
+      const response = await fetch("http://172.30.1.26:5001/admin-server/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json"
          },

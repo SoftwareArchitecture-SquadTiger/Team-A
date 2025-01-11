@@ -73,9 +73,9 @@ const DonorForm = ({ formData, handleInputChange, handleAddressChange, errors })
         <Grid item xs={7}>
           <Typography fontSize={15} sx={{ textAlign: "left", fontWeight: "bold", pl: "4px", pb: "4px",}}> Country </Typography>
           <CustomTextfield
-            value={formData.address.country}
+            value={formData.country}
             onChange={(e) => handleAddressChange("country", e.target.value)}
-            error={errors.address?.country} // error props 
+            error={errors.country} // error props 
           />
         </Grid>
         <Grid item xs={5}>
