@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SignupForm from "../../components/auth/signupForm";
 import charityImage from "../../assets/charity.png";
 
-const SigninPage = () => {
+const SignupPage = () => {
     const theme = useTheme(); // theme hook
     const navigate = useNavigate(); // useNavigate hook
 
@@ -57,4 +57,4 @@ const SigninPage = () => {
     );
     };
 
-    export default SigninPage;
+    export default SignupPage;
