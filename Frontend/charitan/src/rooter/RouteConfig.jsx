@@ -7,7 +7,6 @@ import ForgetPage from '../pages/auth/ForgetPage';
 import RecoveryPage from '../pages/auth/RecoveryPage';
 import AboutUsPage from '../pages/AboutUsPage';
 
-
 import DonationPage from '../pages/donor/DontaionPage';
 
 import LeaderboardPage from '../pages/LeaderboardPage';
@@ -16,11 +15,10 @@ import ProjectList from '../pages/ProjectListPage';
 import HomePage from '../pages/HomePage';
 import DonorHomePage from '../pages/donor/DonorHomePage';
 import DonorHistoryPage from '../pages/donor/DonorHistoryPage';
+// DonorProfilePage
+// Project Discovery page for donors
 import CharityHistoryPage from '../pages/charity/CharityHistoryPage';
-
 import CharityProfilePage from '../pages/charity/CharityProfilePage';
-
-
 import CharityProjectPage from '../pages/charity/charityProjectPage';
 
 const RouteConfig = () => {
