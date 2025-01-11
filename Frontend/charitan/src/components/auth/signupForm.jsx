@@ -17,10 +17,12 @@ import CharityForm from "./charityForm";
 import RoleSelector from "./roleSelector"
 import ImageUploader from "../imageUploader";
 import forge from "node-forge";
+import { useNavigate } from 'react-router-dom';
 
 
 const SignupForm = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const [isChecked, setIsChecked] = useState(false); // checkbox
   const [errors, setErrors] = useState({}); // error state
@@ -226,10 +228,6 @@ TQIDAQAB
     }
 
       try {
-        // console.log(dataToSend)
-       // Store dataToSend in the context
-        // updateApiData(dataToSend);
-  
         const response = await fetch("http://172.30.1.26:5001/admin-server/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json"
@@ -250,9 +248,9 @@ TQIDAQAB
           //localStorage.setItem("authToken", jwe); // Save JWE for subsequent requests
           console.log(data)
           alert("Sign-up successful!");
+          navigate("/signin")
         } else {
           console.error("Detailed error response:", data); // 디버깅용 서버 응답 출력
-
           throw new Error("Invalid credentials");
         }
   
