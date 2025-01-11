@@ -1,65 +1,49 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Grid, Container, Card, CardActionArea, Box, Typography } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocation for current route
-import charityImage from '../../assets/charity.png';
-import NavigationBar from '../../components/navigationBar';
-import DonationBanner from '../../components/donationBanner';
-import CustomCard from '../../components/customCard';
+import charityImage from '../assets/charity.png';
+import NavigationBar from '../components/navigationBar';
+import DonationBanner from '../components/donationBanner';
+import CustomCard from '../components/customCard';
 
 // Import MUI Icons
+import AssessmentIcon from '@mui/icons-material/Assessment';
 import HistoryIcon from '@mui/icons-material/History';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import SettingsIcon from '@mui/icons-material/Settings';
-import SearchIcon from '@mui/icons-material/Search';
 
-import { useAPI } from '../../utils/auth/APIContext';
-
-const DonorHomePage = () => {
-  const { authToken } = useAPI(); // get token
+const GuestPage = () => {
   const navigate = useNavigate(); // React Router hook for navigation
   const location = useLocation(); // React Router hook to get the current route
 
   // Define the card data
   const cards = [
     {
-      icon: SearchIcon,
-      title: 'Project Discovery',
+      icon: AssessmentIcon,
+      title: 'Guest',
       description: 'You can find and manage your all projects here.',
-      route: '/discovery',
+      route: '/projects',
     },
     {
       icon: HistoryIcon,
-      title: 'History',
+      title: 'Guest',
       description: 'You can find your all donations informations.',
-      route: '/donor-history',
+      route: '/charity-history',
     },
     {
       icon: LeaderboardIcon,
-      title: 'Leaderboard',
+      title: 'Guest',
       description: 'The Top 10 Donors/Charities of the Month.',
       route: '/leaderboard',
     },
     {
       icon: SettingsIcon,
-      title: 'Preference',
+      title: 'Guest',
       description: 'You can find the System Settings here.',
       route: '/charity-profile',
     },
   ];
 
-  useEffect(() => {
-    const fetchDonorData = async () => {
-      if (!authToken) {
-        console.error("No auth token available");
-        return;
-      }
-  
-      console.log("Current Auth Token:", authToken); // 토큰 값 출력
-    };
-  
-    fetchDonorData();
-  }, [authToken]); // authToken이 변경될 때만 실행
-  
   return (
     <>
       {/* Pass the current route's pathname to NavigationBar */}
@@ -82,10 +66,11 @@ const DonorHomePage = () => {
                 description={card.description}
                 width={345}
                 height={200}
+                route={card.route}
                 sx={{
                   margin: 'auto', // Center-align cards horizontally
                 }}
-                onClick={() => navigate(card.route)}
+                
               />
             </Grid>
           ))}
@@ -95,4 +80,4 @@ const DonorHomePage = () => {
   );
 };
 
-export default DonorHomePage;
+export default GuestPage;

@@ -51,14 +51,6 @@ const CharityForm = ({ formData, handleInputChange, handleAddressChange, errors 
             error={errors.phoneNumber} // error props
           />
 
-      {/* Address Field */}
-      <Typography fontSize={15} sx={{ textAlign: "left", fontWeight: "bold", pl: "4px", pb: "4px",}}> Street </Typography>
-      <CustomTextfield
-            value={formData.address.street}
-            onChange={(e) => handleAddressChange("street", e.target.value)}
-            error={errors.address?.street}
-          />
-
       <Grid container spacing={1} >
         <Grid item xs={7}>
           <Typography fontSize={15} sx={{ textAlign: "left", fontWeight: "bold", pl: "4px", pb: "4px",}}> City </Typography>
@@ -80,11 +72,11 @@ const CharityForm = ({ formData, handleInputChange, handleAddressChange, errors 
 
       <Grid container spacing={1} >
         <Grid item xs={7}>
-          <Typography fontSize={15} sx={{ textAlign: "left", fontWeight: "bold", pl: "4px", pb: "4px",}}> Country </Typography>
+          <Typography fontSize={15} sx={{ textAlign: "left", fontWeight: "bold", pl: "4px", pb: "4px",}}> Street </Typography>
           <CustomTextfield
-            value={formData.address.country}
-            onChange={(e) => handleAddressChange("country", e.target.value)}
-            error={errors.address?.country} // error props 
+            value={formData.address.street}
+            onChange={(e) => handleAddressChange("street", e.target.value)}
+            error={errors.address?.street}
           />
         </Grid>
         <Grid item xs={5}>

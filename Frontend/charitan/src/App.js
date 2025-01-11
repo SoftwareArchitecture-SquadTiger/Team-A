@@ -1,19 +1,21 @@
 import "./App.css";
 import Footer from "./components/footer";
-import RouteConfig from "./rooter/RouteConfig";
+import RouteConfig from "./router/RouteConfig";
 import { BrowserRouter } from "react-router-dom";
-
+import { APIProvider } from "./utils/auth/APIContext";
 
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <main>
-          <RouteConfig />
-        </main>
-      </BrowserRouter>
-      <Footer />
+      <APIProvider>
+        <BrowserRouter>
+          <main>
+            <RouteConfig />
+          </main>
+        </BrowserRouter>
+        <Footer />
+      </APIProvider>
     </div>
   );
 }

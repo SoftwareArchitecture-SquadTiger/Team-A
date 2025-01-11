@@ -10,11 +10,18 @@ import {
 import RoleSelector from "./roleSelector";
 import { useState, useEffect } from "react";
 import forge from "node-forge";
+import { useNavigate } from 'react-router-dom';
+import { useAPI } from "../../utils/auth/APIContext";
+
+
 
 const SigninForm = () => {
   const theme = useTheme();
   const [error, setError] = useState("");
   const [role, setRole] = React.useState("Donor");
+  const { saveToken } = useAPI();
+  const navigate = useNavigate();
+  
 
   const [formData, setFormData] = useState({
     email: "",
@@ -63,16 +70,12 @@ TQIDAQAB
         password: encryptedPassword,
         userType: formData.userType,
       };
-      console.log(dataToSend)
-      // Store dataToSend in the context
-      // updateApiData(dataToSend);
 
       const response = await fetch("http://172.30.1.26:5001/admin-server/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json"
          },
         body: JSON.stringify(dataToSend),
-        
       });
 
       if (!response.ok) {
@@ -84,19 +87,28 @@ TQIDAQAB
 
       if (data.status === "success") {
         const jwe = data.JWE; // Extract JWE
-        //localStorage.setItem("authToken", jwe); // Save JWE for subsequent requests
+        const role = formData.userType; // 서버에서 받은 역할 (Donor/Charity)
+
+        console.log("JWE Token:", jwe); // 토큰 로그
+        console.log("User Role:", role); // 역할 로그
+
+        saveToken(jwe, role); // Context save
         alert("Login successful!");
+
+        if (role === "Donor"){
+          navigate("/donor-home")
+        } else if (role === "Charity") {
+          navigate("/charity-profile")
+        }
       } else {
         throw new Error("Invalid credentials");
       }
-
 
       alert("Login successful!");
     } catch (error) {
       setError(error.message);
       console.error("Error:", error.message);
     }
-
   };
 
   const handleInputChange = (field, value) => {
@@ -104,14 +116,6 @@ TQIDAQAB
       ...prevData,
       [field]: value,
     }));
-
-    // // erase error
-    // if (value.trim() !== "") {
-    //   setErrors((prevErrors) => ({
-    //     ...prevErrors,
-    //     [field]: false,
-    //   }));
-    // }
   };
 
   return (

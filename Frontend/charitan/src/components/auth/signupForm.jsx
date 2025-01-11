@@ -38,7 +38,6 @@ const SignupForm = () => {
       city: "",
       state: "",
       postal_code: "",
-      country: "",
     },
     country: "",
     password: "",
@@ -83,7 +82,6 @@ TQIDAQAB
         city: "",
         state: "",
         postal_code: "",
-        country: "",
       },
       country: "",
       password: "",
@@ -245,7 +243,6 @@ TQIDAQAB
   
         if (data.status === "success") {
           const jwe = data.JWE; // Extract JWE
-          //localStorage.setItem("authToken", jwe); // Save JWE for subsequent requests
           console.log(data)
           alert("Sign-up successful!");
           navigate("/signin")
